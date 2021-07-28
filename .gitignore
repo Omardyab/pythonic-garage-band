@@ -1,0 +1,4 @@
+__oycache__ 
+.venv
+.pytest_cache
+
