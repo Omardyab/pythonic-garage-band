@@ -151,6 +151,38 @@ def clean():
     There's also a more advanced way to run code after each test as well
     Check the docs for that. Hint: it uses yield
     """
-    Band.instances = []
+    Band.newbands = []
 
 
+#######################
+# Stretch
+#######################
+
+
+@pytest.mark.skip("stretch")
+def test_from_file():
+    with open("assets/bands.json") as f:
+        bands = json.loads(f.read())
+
+    assert len(bands) == 1
+
+    nirvana_data = bands[0]
+
+    nirvana = Band(nirvana_data["name"], nirvana_data["members"])
+
+    assert nirvana.name == "Nirvana"
+
+
+@pytest.mark.skip("stretch")
+def test_from_yaml():
+    bands = yaml.safe_load(open("assets/bands.yml"))
+
+    assert bands[0]["name"] == "Nirvana"
+
+    assert bands[1]["name"] == "The Pixies"
+
+
+@pytest.mark.skip("stretch")
+def test_abstract_musician():
+    with pytest.raises(TypeError):
+        unacceptably_vague_musician = Musician()
